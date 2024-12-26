@@ -1,0 +1,6 @@
+
+pathname=/home/cam/book/long.file.name
+# banner should have long.file.name
+# so we should start to match from start since all dir starts with / and ends with / for file
+
+echo ${pathname##/*/}
