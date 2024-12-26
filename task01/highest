@@ -1,0 +1,15 @@
+
+# Grap the artist count
+# grab the content of file we may need to push in array
+# loop through
+# echo out
+# $1 -> file name, $2 count
+fileName=${1:?"File name must missing"}
+artistCount=${2:-10}
+header=$3
+
+echo -n -e ${header:+"ALBUM ARTIST \n"}
+sort $fileName -nr | head -${artistCount}
+
+
+
