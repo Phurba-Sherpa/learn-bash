@@ -1,0 +1,5 @@
+: '
+The directories in PATH can be hard to distinguish when printed out as one line with
+colon delimiters. You want a simple way to display them, one to a line.
+'
+echo -e ${PATH//:/'\n'}
