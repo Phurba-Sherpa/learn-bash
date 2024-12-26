@@ -1,0 +1,3 @@
+
+fileName=${1:?"File name missing"}
+echo ${fileName/.pcx/.jpeg}
