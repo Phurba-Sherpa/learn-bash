@@ -1,0 +1,14 @@
+: '
+The ls command gives you pattern-matching capability with wildcards, but it doesn’t
+allow you to select files by modification date. Devise a mechanism that lets you do this
+'
+#-rwxr-xr-x 1 wow wow  261 Dec 27 07:30 lsd
+date=$1
+function lsd
+{
+    ls -l | grep -i "^.\{26\}$date" | cut -c40-
+}
+
+lsd
+
+
