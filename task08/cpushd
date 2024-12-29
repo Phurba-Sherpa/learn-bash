@@ -4,10 +4,14 @@ to another directory temporarily and have the shell remember where you were. Imp
 '
 function cpushd()
 {
-    local nextdir=${1:?"Invalid dir"}
-    DIR_STACK="$nextdir ${DIR_STACK:-$PWD }"
-    cd  ${nextdir}
-    echo $DIR_STACK
+    local nextdir=${1}
+    if cd ${nextdir:?"Invalid Directory"}
+    then
+        echo $DIR_STACK
+        DIR_STACK="$nextdir ${DIR_STACK:-$PWD }"
+    fi
+
+
 }
 cpushd
 
