@@ -1,9 +1,8 @@
 
 function cpopd 
 {
-    if [ -n "$DIR_STACK" ];
-        then
-            echo "before: $DIR_STACK"
+    if [ -n "$DIR_STACK" ]; then
+        echo "before: $DIR_STACK"
             DIR_STACK=${DIR_STACK#* }
     echo "after: $DIR_STACK"
         cd ${DIR_STACK%% *}
