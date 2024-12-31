@@ -1,0 +1,21 @@
+: '
+Task 4-4 used pattern matching and substitution to list the directories in PATH, one
+to a line. Unfortunately, old versions of bash don’t have that particular pattern operator. Write a general shell script, listpath, that prints each directory in PATH, one per
+line. In addition, have it print out information about each directory, such as the permissions and the modification times.
+
+WHAT DO WE KNOW?
+1. $PATH - a system variable, that stores the list of dir separated by `:`
+2. We also know we need to use for loop, both $PATH isnt array , so what do we do now?
+'
+for dir in $PATH
+do 
+if [ -z "$dir" ]; then dir.;fi
+
+if ! [ e "$dir" ]; then
+echo "$dir: Doesnt' exits"
+elif ! [ -d "$dir" ]; then 
+echo "$dir isn't Directory"
+else
+ls -ld $dir
+fi
+done
