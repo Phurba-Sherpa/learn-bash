@@ -1,0 +1,25 @@
+#!/bin/bash
+
+: '
+It is possible to print out all of the directories below a given one by using the -R option
+of ls. Unfortunately, this doesn’t give much idea about the directory structure because
+it prints all the files and directories line by line. Write a script that performs a recursive
+directory listing and produces output that gives an idea of the structure for a small
+number of subdirectories.
+
+1. we want to list all ls all content of present dir
+2. check if dir, the we again list 
+3.
+'
+
+list=$(ls)
+
+for dir in $list; do
+    echo "  $dir" 
+    if [ -d "$dir" ]; then
+        sdl=$(ls $dir)
+        for sb in "$sdl"; do
+            echo "  $sb"
+        done
+    fi
+done
