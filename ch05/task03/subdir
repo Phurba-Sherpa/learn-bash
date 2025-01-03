@@ -6,65 +6,21 @@ of ls. Unfortunately, this doesn’t give much idea about the directory structur
 it prints all the files and directories line by line. Write a script that performs a recursive
 directory listing and produces output that gives an idea of the structure for a small
 number of subdirectories.
-
-1. we want to list all ls all content of present dir
-2. check if dir, the we again list 
-3.
-list=$(ls)
-
-for dir in $list; do
-    echo "  $dir" 
-    if [ -d "$dir" ]; then
-        sdl=$(ls $dir)
-        for sb in "$sdl"; do
-            echo "  $sb"
-        done
-    fi
-done
 '
 
+function recls() {
+    singletab="\t"
+    files=$(command ls)
+    for tryfile in $files; do
+        echo $tryfile
 
-
-: '
-LETS TRY RECURSIVE VERSION, MORE ROBUST SOLUTIONS
-
-LETS BUILD ALGO
-1. ls to get the list
-2. for each list
-    2.1 if its file echo 
-    2.2 if dir
-        2.1 cd dir
-        2.2 goto step 1 
-        2.3 cd ../
-
-DRY RUN
-/folder1
-    /sub1
-        subdirfile2
-    subdirfile1
-dirfile1
-
-ITERATIN 1
-ls -> folder1 dirfile1
-2. for folder1 
-    2.1 (no action since dir)
-    2.2 dir is true
-        2.1 cd folder1
-        2.2 (goto step 1); ls -> sub1, subdirfile1
-         (sub1 is dir so, cd sub1, ls -> subdirfile2, its file so echo, cd ../
-        subdirfile1 is file so echo)
-        cd ../
-        dirfile1 file so echo
-        
-
-        output: 
-        subdirfile2
-        subdirfile1
-        dirfile1
-        [we have missed the spacing and dir name]
-        lets try init version then
-' 
-
+        if [ -d $tryfile ]; then
+            thisfile=$tryfile
+            recdir $(command ls $tryfile)
+        fi
+    done
+     unset dir singletab tab
+}
 function recdir() {
     tab=${tab}${singletab}
 
@@ -82,21 +38,26 @@ function recdir() {
 
 }
 
-function recls() {
-    singletab="\t"
-    files=$(command ls)
-    for tryfile in $files; do
-        echo $tryfile
-
-        if [ -d $tryfile ]; then
-            thisfile=$tryfile
-            recdir $(command ls $tryfile)
-        fi
-    done
-     unset dir singletab tab
-}
 recls
+: '
+task: home work: todo my own version
+1. In the current version, there is no way to determine if biog is a file or a directory.
+An empty directory looks no different to a file in the listing. Change the output
+so it appends a / to each directory name when it displays it.
 
+2. Modify the code so that it only recurses down a maximum of eight subdirectories 
+(which is about the maximum before the lines overflow the right-hand side
+of the screen). Hint: think about how TABs have been implemented.
+
+3. Change the output so it includes dashed lines and adds a blank line after each
+directory, thus:
+
+At the start of this section we pointed out that the for loop in its standard form
+wasn’t capable of iterating over a specified range of values as can be done in most
+programming languages. bash 2.0 introduced a new style of for loop which caters for
+this task; the arithmetic for loop. Well come back to it in the next chapter when we
+look at arithmetic operations.
+'
          
 
 
