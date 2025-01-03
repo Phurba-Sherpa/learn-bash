@@ -10,8 +10,6 @@ number of subdirectories.
 1. we want to list all ls all content of present dir
 2. check if dir, the we again list 
 3.
-'
-
 list=$(ls)
 
 for dir in $list; do
@@ -23,3 +21,83 @@ for dir in $list; do
         done
     fi
 done
+'
+
+
+
+: '
+LETS TRY RECURSIVE VERSION, MORE ROBUST SOLUTIONS
+
+LETS BUILD ALGO
+1. ls to get the list
+2. for each list
+    2.1 if its file echo 
+    2.2 if dir
+        2.1 cd dir
+        2.2 goto step 1 
+        2.3 cd ../
+
+DRY RUN
+/folder1
+    /sub1
+        subdirfile2
+    subdirfile1
+dirfile1
+
+ITERATIN 1
+ls -> folder1 dirfile1
+2. for folder1 
+    2.1 (no action since dir)
+    2.2 dir is true
+        2.1 cd folder1
+        2.2 (goto step 1); ls -> sub1, subdirfile1
+         (sub1 is dir so, cd sub1, ls -> subdirfile2, its file so echo, cd ../
+        subdirfile1 is file so echo)
+        cd ../
+        dirfile1 file so echo
+        
+
+        output: 
+        subdirfile2
+        subdirfile1
+        dirfile1
+        [we have missed the spacing and dir name]
+        lets try init version then
+' 
+
+function recdir() {
+    tab=${tab}${singletab}
+
+    for file in "$@"; do
+        echo -e $tab$file
+        thisfile=${thisfile}/${file}
+
+        if [ -d "$thisfile" ]; then
+            recdir $(command ls $thisfile)
+        fi
+
+        thisfile=${thisfile%/*}
+    done
+     tab=${tab%"$singletab"}
+
+}
+
+function recls() {
+    singletab="\t"
+    files=$(command ls)
+    for tryfile in $files; do
+        echo $tryfile
+
+        if [ -d $tryfile ]; then
+            thisfile=$tryfile
+            recdir $(command ls $tryfile)
+        fi
+    done
+     unset dir singletab tab
+}
+recls
+
+         
+
+
+
