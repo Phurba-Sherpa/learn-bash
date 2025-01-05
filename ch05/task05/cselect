@@ -9,11 +9,15 @@ to another directory temporarily and have the shell remember where you were. Imp
 '
 
 
-TEST="$PWD /usr /home /bin"
+TEST=" $PWD /usr /home /bin "
 function selectd () {
     select selection in $TEST; do
         if [ $selection ]; then
-            echo "selected: $selection"
+
+            # remove selected dir from TEST
+            TEST=" $selection${TEST/ $selection / }"
+            echo "New path: $TEST"
+            cd $selection
             break
         else
             echo "Invalid selection"
