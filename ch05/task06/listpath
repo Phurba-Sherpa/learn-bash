@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+:''
+
+path=/home/wow/personal/learn-bash/ch05/task06:/home/wow/personal/learn-bash/ch05/task05:/home/wow/personal/learn-bash/task01:
+
+while [ $path ]; do
+    ls -ld ${path%%:*}
+    path=${path#*:}
+done
+
