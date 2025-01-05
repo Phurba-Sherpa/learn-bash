@@ -1,0 +1,3 @@
+
+# mail the currently logged in user
+mail $(cut -d' ' -f1 $(who))
