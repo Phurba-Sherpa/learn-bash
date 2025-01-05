@@ -1,0 +1,24 @@
+#!/usr/bin/bash
+
+: 'Write a function that allows the user to select a directory from a list of directories 
+currently in the pushd directory stack. The selected directory is moved to the front of the
+stack and becomes the current working directory
+
+The functions pushd and popd implement a stack of directories that enable you to move
+to another directory temporarily and have the shell remember where you were. Implement them as shell functions.
+'
+
+
+TEST="$PWD /usr /home /bin"
+function selectd () {
+    select selection in $TEST; do
+        if [ $selection ]; then
+            echo "selected: $selection"
+            break
+        else
+            echo "Invalid selection"
+        fi 
+    done
+}
+
+selectd
