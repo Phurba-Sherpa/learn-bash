@@ -11,3 +11,6 @@ function cpushd() {
 }
 
 cpushd
+
+function cpopd() {}
+
