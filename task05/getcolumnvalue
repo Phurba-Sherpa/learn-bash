@@ -1,0 +1,15 @@
+: '
+The file used in Task 4-1 is actually a report derived from a bigger table of data about
+albums. This table consists of several columns, or fields, to which a user refers by
+names like “artist,” “title,” “year,” etc. The columns are separated by vertical bars (|,
+the same as the UNIX pipe character). To deal with individual columns in the table,
+field names need to be converted to field numbers.
+Suppose there is a shell function called getfield that takes the field name as argument
+and writes the corresponding field (or column) number on the standard output. Use
+this routine to help extract a column from the data table.
+'
+
+fieldname=${1:?"Column name missing"}
+
+colval=$(cut -d\| -f$(getfield $fieldname) data.txt)
+echo $colval
