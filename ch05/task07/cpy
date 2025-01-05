@@ -1,0 +1,7 @@
+
+#!/usr/bin/bash
+
+until cp $1 $2; do 
+    echo "Attempt to copy failed, waitting..."
+    sleep 5
+done
