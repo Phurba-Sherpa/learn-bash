@@ -3,14 +3,14 @@ The functions pushd and popd implement a stack of directories that enable you to
 to another directory temporarily and have the shell remember where you were. Implement them as shell functions.
 '
 
-nextdir=${1:?"Invalid dir"}
-function cpushd() {
+function cpushd 
+{
+    nextdir=${1:?"Invalid dir"}
     DIR_STACK="$nextdir ${DIR_STACK:-$PWD' '}"
     cd  ${nextdir}
     echo $DIR_STACK
 }
-
 cpushd
 
-function cpopd() {}
+
 
