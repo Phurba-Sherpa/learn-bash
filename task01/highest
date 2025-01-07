@@ -1,4 +1,4 @@
-
+#!/usr/bin/bash
 # Grap the artist count
 # grab the content of file we may need to push in array
 # loop through
@@ -6,20 +6,20 @@
 # $1 -> file name, $2 count
 #
 function highest() {
-
-    if [ -z "$1" ]; then 
-        echo 'usage: highest filename [-N]'
+    howmany='-10'
+    if [ -n "$(echo $1 | grep '^-[0-9]\+$' )" ]; then
+        howmany=$1
+        shift
+    elif [ -n "$(echo $1 | grep '^-')" ]; then
+        echo 'usage: higest [-N] filename'
         exit 1
     fi
 
-    local fileName=$1
-    artistCount=${2:--10}
-    header=$3
-    echo -n -e ${header:+"ALBUM ARTIST \n"}
-    sort $fileName -nr | head ${artistCount}
+    filename=$1
+    sort -nr $filename | head $howmany
 }
 
-highest
+highest "$@"
 
 
 
