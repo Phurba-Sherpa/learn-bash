@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+: '
+Here is a small task that makes use of integer arithmetic. Write a script called ndu that
+prints a summary of the disk space usage for each directory argument (and any subdirectories),
+both in terms of bytes, and kilobytes or megabytes (whichever is appropriate).
+'
+
