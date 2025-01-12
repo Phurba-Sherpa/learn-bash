@@ -6,7 +6,7 @@ Task: Write a script that calculates the length of a given string.
 '
 
 word=hello
-len=$(($(echo $word | wc -m) - 1))
+len=${#word}
 
 echo "length of $word: $len"
 
