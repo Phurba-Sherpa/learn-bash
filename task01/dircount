@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+: '
+count no. of dir in home dir
+' 
+
+dir_count=0
+dir_list=$(find ~/ -maxdepth 1 -mindepth 1 -type d)
+
+for dir in $dir_list; do
+    dir_count=$((dir_count + 1))
+done
+
+echo "total dir in home dir: $dir_count"
+
