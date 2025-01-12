@@ -2,8 +2,8 @@
 
 : '
 count no. of dir in home dir
-' 
 
+ VERSION I
 dir_count=0
 dir_list=$(find ~/ -maxdepth 1 -mindepth 1 -type d)
 
@@ -12,4 +12,10 @@ for dir in $dir_list; do
 done
 
 echo "total dir in home dir: $dir_count"
+
+
+' 
+
+echo "total dir count: $(find ~/ -maxdepth 1 -mindepth 1 -type d | wc -l)"
+
 
