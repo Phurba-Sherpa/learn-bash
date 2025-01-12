@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+: ' 
+Task: Given the string "apple banana apple", replace all occurrences of apple with orange.
+'
+
+sent="apple banana apple"
+echo "original string: $sent"
+echo "after replace with 'orange': ${sent//apple/orange}"
