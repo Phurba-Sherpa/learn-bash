@@ -6,4 +6,9 @@ Task: Given the string "apple banana apple", replace all occurrences of apple wi
 
 sent="apple banana apple"
 echo "original string: $sent"
-echo "after replace with 'orange': ${sent//apple/orange}"
+
+# Will replace entire string
+echo "after replace with 'orange' [all]: ${sent//apple/orange}"
+
+# Will replace first string
+echo "after repalce with 'orange' [first]: ${sent/apple/orange}"
