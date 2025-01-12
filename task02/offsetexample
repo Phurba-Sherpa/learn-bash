@@ -16,3 +16,5 @@ echo "substr(1, 3): ${word:1:3}"
 # Challenges
 echo "-3:len: ${word:(len - 4)}"
 
+echo "-3:len": ${word: -3}
+
