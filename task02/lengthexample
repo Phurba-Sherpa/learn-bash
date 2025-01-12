@@ -2,6 +2,7 @@
 
 : '
 Task: Write a script that calculates the length of a given string.
+ Challenge: Use the length of the string to extract the last 3 characters
 '
 
 word=hello
@@ -9,4 +10,7 @@ len=$(($(echo $word | wc -m) - 1))
 
 echo "length of $word: $len"
 
+# challenges
+
+echo "last 3 chars: ${word:(len - 3)}"
 
