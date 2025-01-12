@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+: '
+Task: Write a script that calculates the length of a given string.
+'
+
+word=hello
+len=$(($(echo $word | wc -m) - 1))
+
+echo "length of $word: $len"
+
+
