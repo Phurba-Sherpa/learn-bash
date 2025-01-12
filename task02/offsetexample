@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+: '
+Task: Extract the substring from the 2nd character to the 4th character from the string "abcdef". 
+The result should be "bcd".
+'
+
+word="abcdef"
+echo "original: $word"
+
+echo "substr(1, 3): ${word:1:3}"
