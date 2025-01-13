@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+: '
+Task: Remove all leading spaces from the string " Hello World!".
+Challenge: Remove both leading and trailing spaces from " Hello World! ".
+'
+
+text=" Hello World!"
+text2=" Hello World! "
+echo "initial text:$text"
+echo "after removing leading space:${text#' '}"
+
+lead_removed=${text2#' '}
+trail_removed=${lead_removed%" "}
+echo "after removing leading space:${trail_removed}."
