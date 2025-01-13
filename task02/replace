@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+: '
+Task: Replace all numbers (digits) in the string "abc123xyz" with X.
+Challenge: Replace only the first digit in the string with X.
+'
+
+str=abc123xyz
+
+echo "original: $str"
+echo "after replaced: ${str//[0-9]/X}"
