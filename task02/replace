@@ -9,3 +9,4 @@ str=abc123xyz
 
 echo "original: $str"
 echo "after replaced: ${str//[0-9]/X}"
+echo "after replaced [first only]: ${str/[0-9]/X}"
