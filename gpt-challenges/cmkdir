@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+: '
+Task: Automate the creation of a directory structure where each subdirectory contains a placeholder file.
+Example: project/{docs,src,bin} with a README.md in each.
+Challenge: Use a for loop to iterate through a list of directories and:
+Check if each exists.
+If not, create it and log the action.
+' 
+
+for dir in  $@; do
+    if [ -d $dir ]; then
+        echo "$dir is a dir"
+    else
+        echo "$dir is not a dir"
+    fi
+done
