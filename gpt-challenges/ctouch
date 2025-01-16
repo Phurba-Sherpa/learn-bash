@@ -1,0 +1,30 @@
+#!/bin/bash
+
+: '
+Challenge: Write a script to:
+- Accept a file name as input.
+- Check if the file exists.
+- If it exists, back it up with a `.bak` extension.
+- If not, create the file and add some initial content.
+-z str1 means string is null
+'
+
+newfile=${1:?"Usage: $0 <filename>"}
+
+
+if [ -f $newfile ]; then
+    bak_fn="$newfile.bak"
+    if cp $newfile $bak_fn; then
+        echo "Backup success: $bak_fn"
+        exit 0;
+    else
+        echo "Backup failed: $newfile"
+        exit 1;
+    fi
+else
+    echo "# This is newly created file" > $newfile
+    echo "New file created: $newfile"
+    exit 0
+fi
+    
+
