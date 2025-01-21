@@ -5,3 +5,21 @@ prints a summary of the disk space usage for each directory argument (and any su
 both in terms of bytes, and kilobytes or megabytes (whichever is appropriate).
 '
 
+
+for dir in ${*:-.}; do
+    if [ -a $dir ]; then
+        sizeinblock=$(du -s $dir | cut -f1)
+        sizeinbyte=$((1024*sizeinblock))
+        mbunit=$((1024*1024))
+        echo -n "size of $dir/: $sizeinbyte bytes"
+
+        if ((mbunit<=sizeinbyte)); then
+            echo "($((sizeinbyte/mbunit)) Mb)"
+        else
+            echo "($((sizeinblock)) Kb)"
+        fi
+    else
+        echo "$dir is invalid file or dir"
+        exit 1
+    fi
+done
