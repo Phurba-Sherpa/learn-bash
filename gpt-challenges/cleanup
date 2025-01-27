@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# Automate the cleanup of a directory by:
+# Moving all `.tmp` files to a backup folder.
+# Deleting `.log` files older than 30 days.
+
+
+# move .tem files to backup
+
+# move tmp file to backup folder
+mv -t backup *.tmp
+
+# del log of older than 30 days
+
+MINDAY=30
+
+files=$(find ./ -maxdepth 1 -type f -regex '.*\.log$' -mtime +$MINDAY)
+
+if [ -n "$files" ]; then
+    if rm $files; then
+        echo "$files removed success!"
+        exit 0
+    else
+        echo "Failed to delete $files"
+        exit 1
+    fi
+else
+    echo "Files older than $MINDAY not found!"
+fi
+
+
+
