@@ -1,0 +1,29 @@
+#!/bin/bash
+
+: '
+Write a script that asks the user to input a number and checks whether it is:
+Greater than 10
+Equal to 10
+Less than 10
+Use -lt, -eq, and -gt operators.
+Bonus: Add error handling for non-numeric input.
+'
+
+case $# in
+    0)
+        echo "Usage: $0 num"
+        exit 1;;
+    1)
+        num=$1
+        if [ $num -lt 10 ]; then
+            echo "Is less than 10"
+        elif [ $num -eq 10 ]; then
+            echo "Is equal to 10"
+        else
+            echo "Is greater than 10"
+        fi
+        ;;
+    *)
+        echo "Usage: $0 num"
+        exit 1;;
+esac
