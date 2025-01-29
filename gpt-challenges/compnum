@@ -8,22 +8,16 @@ Less than 10
 Use -lt, -eq, and -gt operators.
 Bonus: Add error handling for non-numeric input.
 '
+if [ $# -ne 1 ];then
+    echo "Usage: $0 num"
+    exit 1
+fi
 
-case $# in
-    0)
-        echo "Usage: $0 num"
-        exit 1;;
-    1)
-        num=$1
-        if [ $num -lt 10 ]; then
-            echo "Is less than 10"
-        elif [ $num -eq 10 ]; then
-            echo "Is equal to 10"
-        else
-            echo "Is greater than 10"
-        fi
-        ;;
-    *)
-        echo "Usage: $0 num"
-        exit 1;;
-esac
+num=$1
+if [ $num -lt 10 ]; then
+    echo "Is less than 10"
+elif [ $num -eq 10 ]; then
+    echo "Is equal to 10"
+else
+    echo "Is greater than 10"
+fi
