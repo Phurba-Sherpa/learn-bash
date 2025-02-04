@@ -1,0 +1,45 @@
+#!/bin/bash
+
+: '
+Write a script that:
+- Accepts a filename as an argument.
+- Checks whether it is a **regular file, directory, or does not exist** using `if` statements.
+- Prints the appropriate message.
+- If its a file, check its **read, write, and execute** permissions.
+'
+# helper func
+
+# check if correct number of args exists
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <file-name>"
+    exit 1
+fi
+
+file="$1"
+
+# check for valid file
+if [ ! -e $file  ]; then
+    echo "$file does not exists"
+    exit 1
+fi
+
+if [ -d $file ]; then
+    echo "$file is a directory."
+elif [ -f $file ]; then
+    echo "$file is a regular file."
+
+    # check for read permission
+    if [ -r $file ]; then
+        echo "$file has a read permission"
+    fi
+
+    # check for write permission
+    if [ -w $file ];then
+        echo "$file has a write permission."
+    fi
+
+    # check for execute permission
+    if [ -x $file ];then
+        echo "$file has a execute permission"
+    fi
+fi
