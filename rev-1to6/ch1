@@ -1,0 +1,19 @@
+#!/bin/bash
+
+: '
+Write a script that:
+- Takes a file path as an argument.
+- Extracts only the filename (without the extension).
+- Converts it to uppercase and prints it.
+'
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <path>"
+    exit 1
+fi
+
+filepath=$1
+
+filename=${filepath##*/}
+fnwithoutext=${filename%.*}
+tfn=$(echo $fnwithoutext | tr [:lower:] [:upper:])
+echo $tfn
