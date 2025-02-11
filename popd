@@ -1,0 +1,27 @@
+#!/bin/bash
+: '
+============= part 1 ======================
+The functions pushd and popd implement a stack of directories that enable you to move
+to another directory temporarily and have the shell remember where you were. Implement them as shell functions.
+
+specs: 
+1. First time `pushd` called, pushd pushes current dir and cds to dir and pushes the dir
+2. on subsequent call to `pushd`, cd to dir and push to dir
+3. `popd` pops off the top dir, revealing new top dir and cd to top dir
+
+- stack will be list of dirs separated by spaces
+'
+
+function popd {
+    if [ -n "$DIR_STACK" ]; then
+        DIR_STACK=${DIR_STACK#*' '}
+        nextdir=${DIR_STACK%%' '*}
+        cd $nextdir
+        echo "Switched to $nextdir"
+    else 
+        echo "Empty stack"
+    fi
+}
+
+popd
+
