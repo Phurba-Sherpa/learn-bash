@@ -15,15 +15,16 @@ specs:
 function pushd() {
     DIR_STACK="${DIR_STACK:-$PWD}"
 
-    # check if dir is passed
+    # check if dir arg exists 
     if [ -z "$1" ];then
         echo "Usage: pushd <dir>"
         return 1
     fi
 
     nextdir=$1
-    if [ -d "$nextdir" ]; then 
-        DIR_STACK="${PWD}/${nextdir}"
+    if cd "$nextdir"; then
+        DIR_STACK="${PWD} ${DIR_STACK}"
+        echo "switched to $PWD"
     else
         echo "Invalid dir: $nextdir"
         return 1
