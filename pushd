@@ -13,7 +13,7 @@ specs:
 '
 
 function pushd() {
-    DIR_STACK="${DIR_STACK:-$PWD}"
+    DIR_STACK=${DIR_STACK:-$PWD' '}
 
     # check if dir arg exists 
     if [ -z "$1" ];then
@@ -29,8 +29,6 @@ function pushd() {
         echo "Invalid dir: $nextdir"
         return 1
     fi
-
-    echo $DIR_STACK
 }
 pushd "$@"
 
