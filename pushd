@@ -22,12 +22,12 @@ function pushd() {
     fi
 
     nextdir=$1
-    if cd "$nextdir"; then
+    if [ -n "$nextdir" ] && [ \( -d "$nextdir" \) -a \( -x "$nextdir" \) ]; then
+        cd "$nextdir"
         DIR_STACK="${PWD} ${DIR_STACK}"
         echo "switched to $PWD"
     else
-        echo "Invalid dir: $nextdir"
-        return 1
+        echo "Still in $PWD"
     fi
 }
 pushd "$@"
