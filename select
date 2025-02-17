@@ -1,0 +1,21 @@
+#!/bin/bash
+
+: '
+Write a function that allows the user to select a directory from a list of 
+directories currently in the pushd directory stack. The selected directory is moved to the front of the
+stack and becomes the current working directory
+'
+PS3="directory?"
+select selection in $DIR_STACK
+do
+    if [ "$selection" ]; then
+        if builtin cd "$selection"; then
+            DIR_STACK=${DIR_STACK/"$selection "/""}
+            DIR_STACK="${selection} ${DIR_STACK}"
+            echo "switched to $PWD"
+        fi
+        break
+    else 
+        echo "invalid selection"
+    fi
+done
