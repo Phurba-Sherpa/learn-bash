@@ -10,6 +10,14 @@ specs:
 3. `popd` pops off the top dir, revealing new top dir and cd to top dir
 
 - stack will be list of dirs separated by spaces
+
+============= part 2 ======================
+1. pushd +n takes the nth directory in the stack (starting with 0), rotates it to the
+   top, and cds to it.
+2. pushd without arguments, instead of complaining, swaps the two top directories
+   on the stack and cds to the new top.
+3. popd +n takes the nth directory in the stack and just deletes it.
+
 '
 
 function pushd() {
