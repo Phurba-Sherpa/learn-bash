@@ -2,7 +2,8 @@
 : '
 ============= part 1 ======================
 The functions pushd and popd implement a stack of directories that enable you to move
-to another directory temporarily and have the shell remember where you were. Implement them as shell functions.
+to another directory temporarily and have the shell remember where you were.
+Implement them as shell functions.
 
 specs: 
 1. First time `pushd` called, pushd pushes current dir and cds to dir and pushes the dir
@@ -14,19 +15,50 @@ specs:
 ============= part 2 ======================
 1. popd +n takes the nth directory in the stack and just deletes it.
 '
-
-function getNdir() {}
-
 function popd {
     if [ -n "$DIR_STACK" ]; then
-        DIR_STACK=${DIR_STACK#*' '}
-        nextdir=${DIR_STACK%%' '*}
-        cd $nextdir
-        echo "Switched to $nextdir"
+
+        # If no args then we will simply pop the top
+        case "$#" in
+            0)
+                DIR_STACK=${DIR_STACK#*' '}
+                nextdir=${DIR_STACK%%' '*}
+                cd $nextdir
+                echo "Switched to $nextdir"
+                ;;
+                # If 1 args then we will delete the dir of given position
+            1)
+
+            
+            # Check for correct syntax of args
+                if [ $(echo "$1" | grep '\+[0-9][0-9]*') ]; then 
+                    pos=${1#+}
+                    count=0
+                    header=""
+                    trailer=""
+                    for dir in $DIR_STACK; do
+                        if [ $pos -eq $count ];then
+                            trailer=${DIR_STACK#*$dir' '}
+                            DIR_STACK=$header$trailer
+                            break
+                        fi 
+                         header="$header$dir "
+                        count=$((count+1))
+                    done
+                    
+                else 
+                    echo "Invalid argument: $1"
+                    exit 1
+                fi
+                ;;
+            *)
+                echo "Usage: $0 [+n]"
+                ;;
+        esac
     else 
         echo "Empty stack"
     fi
 }
 
-popd
+popd "$@"
 
