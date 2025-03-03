@@ -24,6 +24,42 @@ function pushd() {
     DIR_STACK=${DIR_STACK:-$PWD' '}
 
     # check if dir arg exists 
+        case "$#" in
+            0)
+                DIR_STACK=${DIR_STACK#*' '}
+                nextdir=${DIR_STACK%%' '*}
+                cd $nextdir
+                echo "Switched to $nextdir"
+                ;;
+                # If 1 args then we will delete the dir of given position
+            1)
+
+            
+            # Check for correct syntax of args
+                if [ $(echo "$1" | grep '\+[0-9][0-9]*') ]; then 
+                    pos=${1#+}
+                    count=0
+                    header=""
+                    trailer=""
+                    for dir in $DIR_STACK; do
+                        if [ $pos -eq $count ];then
+                            trailer=${DIR_STACK#*$dir' '}
+                            DIR_STACK=$header$trailer
+                            break
+                        fi 
+                         header="$header$dir "
+                        count=$((count+1))
+                    done
+                    
+                else 
+                    echo "Invalid argument: $1"
+                    exit 1
+                fi
+                ;;
+            *)
+                echo "Usage: $0 [+n]"
+                ;;
+        esac
     if [ -z "$1" ];then
         echo "Usage: pushd <dir>"
         return 1
