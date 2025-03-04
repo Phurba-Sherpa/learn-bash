@@ -1,0 +1,12 @@
+#!/bin/bash
+
+declare -a records 
+ for acc in $(cut -f 1,3 -d ':' /etc/passwd) ; do
+     arrIndex=${acc#*:}
+     accName=${acc%:*}
+     records[$arrIndex]=$accName
+ done
+
+ echo "User ID $1 is ${records[$1]}"
+ echo "Total accounts in system: ${#records[@]}"
+
